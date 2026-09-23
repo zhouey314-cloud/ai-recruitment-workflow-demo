@@ -2,6 +2,8 @@
 
 Synthetic decision support: 12 fictional resumes, 3 fictional jobs, evidence extraction, rubric scoring and a mandatory human decision gate.
 
+![Illustrative human review screen](docs/images/review-screen.png)
+
 ![Architecture](docs/images/architecture.svg)
 
 ## Demo / quick start
