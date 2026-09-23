@@ -2,6 +2,8 @@
 import json
 from pathlib import Path
 
+RULES = json.loads((Path(__file__).resolve().parent / 'data/rules.json').read_text())
+
 def parse_resume(record:dict)->dict:
     required={'id','name','skills','years','evidence'}
     if not required.issubset(record) or not isinstance(record['skills'],list) or not isinstance(record['evidence'],list):raise ValueError('INVALID_RESUME')
@@ -19,10 +21,15 @@ def evaluate(resume:dict,job:dict)->dict:
     evidence=extract_evidence(resume,job)
     points=sum(1 for e in evidence if e['supported'])
     score=round(100*points/max(1,len(job['skills'])))
-    return {'resume_id':resume['id'],'job_id':job['id'],'score':score,'evidence':evidence,'missing':[e['skill'] for e in evidence if not e['supported']],'state':'HUMAN_REVIEW','decision':None,'synthetic_unverified':True}
+    missing=[e['skill'] for e in evidence if not e['supported']]
+    risk=[]
+    if not resume['evidence']:risk.append('NO_EVIDENCE')
+    if any(skill.lower() in {s.lower() for s in resume['skills']} for skill in missing):risk.append('SELF_REPORTED_UNSUPPORTED')
+    if resume.get('conflicts'):risk.append('CONFLICT_FLAG')
+    return {'resume_id':resume['id'],'job_id':job['id'],'score':score,'evidence':evidence,'missing':missing,'risk':risk,'state':RULES['review_state'],'decision':None,'synthetic_unverified':True}
 
 def decide(result:dict,reviewer:str,decision:str,reason:str)->dict:
-    if result['state']!='HUMAN_REVIEW' or not reviewer.strip() or not reason.strip() or decision not in {'INTERVIEW','HOLD','DECLINE'}:raise ValueError('HUMAN_GATE_REQUIRED')
+    if result['state']!=RULES['review_state'] or not reviewer.strip() or not reason.strip() or decision not in RULES['allowed_human_decisions']:raise ValueError('HUMAN_GATE_REQUIRED')
     result['decision']=decision;result['state']='HUMAN_DECIDED';result['audit']={'reviewer':reviewer,'reason':reason,'decision':decision};return result
 
 def main():

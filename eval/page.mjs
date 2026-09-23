@@ -1,0 +1,8 @@
+import {evaluate} from '../web/rules.mjs';
+const load=async path=>{const response=await fetch(new URL(path,import.meta.url));if(!response.ok)throw new Error(`Failed to load ${path}`);return response.text();};
+const json=async path=>JSON.parse(await load(path));
+const [resumes,jobs,rules,golden,regression]=await Promise.all([json('../data/resumes.json'),json('../data/jobs.json'),json('../data/rules.json'),load('../evals/golden.jsonl'),load('../evals/regression.jsonl')]);
+const cases=[...golden.split('\n'),...regression.split('\n')].filter(Boolean).map(JSON.parse);
+let passed=0;const body=document.getElementById('cases');
+for(const item of cases){const resume=item.resume??resumes.find(r=>r.id===item.resume_id);const job=item.job??jobs.find(j=>j.id===item.job_id);const actual=evaluate(resume,job,rules);const supported=actual.evidence.filter(e=>e.supported).map(e=>e.skill);const okay=(item.expected_score===undefined||actual.score===item.expected_score)&&(item.expected_supported===undefined||JSON.stringify(supported)===JSON.stringify(item.expected_supported));if(okay)passed++;const row=document.createElement('tr');for(const value of [item.case??`${item.resume_id} × ${item.job_id}`,item.expected_score===undefined?item.expected_supported.join(', ')||'none':`score ${item.expected_score}`,`score ${actual.score}; supported: ${supported.join(', ')||'none'}`,okay?'PASS':'FAIL']){const cell=document.createElement('td');cell.textContent=value;row.append(cell);}body.append(row);}
+document.getElementById('summary').textContent=`${passed} / ${cases.length} synthetic fixture cases passed in this browser. Provenance: synthetic_unverified; model quality: NOT_RUN.`;

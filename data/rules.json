@@ -1,0 +1,8 @@
+{
+  "version": "1.0.0",
+  "evidence_match": "case_insensitive_substring",
+  "score_formula": "round(100 * supported_job_skills / max(1, job_skill_count))",
+  "review_state": "HUMAN_REVIEW",
+  "allowed_human_decisions": ["INTERVIEW", "HOLD", "DECLINE"],
+  "risk_codes": ["NO_EVIDENCE", "SELF_REPORTED_UNSUPPORTED", "CONFLICT_FLAG"]
+}
