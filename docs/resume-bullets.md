@@ -1,15 +1,21 @@
-# Resume bullets
+# 招聘审核工作台 Demo — 中文简历项目要点
 
-These bullets describe the public synthetic demo only. Do not claim production use.
+仅描述公开仓库内可核查的自建演示；按岗位挑选，勿三版叠加。证据与边界以 README、测试和 [case study](case-study.md) 为准。
 
-## 中文简历版本
+## AI Engineer / FDE
 
-- 构建招聘决策支持演示；使用虚构简历、证据追踪与人工审核闸门；9 项测试及 5 项合成夹具通过。
-- 设计可复用的输入、状态与失败边界；通过仓库 README、架构图与示例输出展示实现方式。
-- 区分离线测试、合成夹具和真实外部验证；避免将 Mock 结果写成生产效果。
+- 围绕“招聘辅助判断需要证据链与人工决策闸门，不能自动录拒”，用 Python、浏览器端共享规则、GitHub Pages 实现虚构简历评分、证据/风险展示、reviewer/action/reason 必填、审计与重置。
+- 验证：13 项单元测试、5 项合成夹具与 36 项 Python/浏览器对照；当前仅有合成规则回归；真实招聘效度未经验证。
+- 明确边界：候选人均为合成资料；关键词证据不代表真实胜任力；没有真实模型。
 
-## English resume version
+## AI Product / Solution
 
-- Built a synthetic recruitment decision support demo with evidence trace and human decision gate; 9 tests and 5 fixtures pass.
-- Documented the architecture, state transitions and failure paths with runnable examples and repository evidence.
-- Separated local verification, synthetic fixtures and unverified external integrations in the public handoff.
+- 将“招聘辅助判断需要证据链与人工决策闸门，不能自动录拒”拆成可点击的用户流程，交付虚构简历评分、证据/风险展示、reviewer/action/reason 必填、审计与重置。
+- 用可运行 Demo、测试和案例页说明实现与限制；13 项单元测试、5 项合成夹具与 36 项 Python/浏览器对照。
+- 为客户化落地列出前置条件：隐私/偏见评估、人工审核、真实身份与权限、可申诉流程和留存治理。
+
+## 实习 / 校招
+
+- 独立完成招聘审核工作台 Demo的公开演示、代码、测试和文档，技术栈为 Python、浏览器端共享规则、GitHub Pages。
+- 解决“让 Python 与浏览器评分规则一致，避免前后端给出不同结论”，保留可复核的验证：13 项单元测试、5 项合成夹具与 36 项 Python/浏览器对照。
+- 不把演示包装成上线业务：候选人均为合成资料；关键词证据不代表真实胜任力；没有真实模型。

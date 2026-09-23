@@ -1,12 +1,29 @@
-# Interview notes
+# 招聘审核工作台 Demo — 面试讲述卡
 
-1. **Why?** To make ai recruitment workflow demo an inspectable portfolio artifact.
-2. **Hardest problem?** No automatic hiring or rejection.
-3. **Why this architecture?** Keep policy and workflow logic independent from transport and external providers.
-4. **Where is AI?** The design marks provider boundaries; any disconnected model remains unverified.
-5. **What stays human?** Final review, business truth and any external release decision.
-6. **How verified?** Run the tests and sample commands in README; inspect their exact scope.
-7. **Failure learned?** Keyword evidence can miss synonyms or over-credit weak claims.
-8. **Redo?** Add reviewed cases and a narrower production migration path.
-9. **Production scale?** Add real auth, durable storage, observability, privacy review and provider-backed evals where relevant.
-10. **My contribution?** Independent clean-room code, tests, docs and public release; no company source copied.
+## 60 秒
+
+我做这个自建项目是为了解决“招聘辅助判断需要证据链与人工决策闸门，不能自动录拒”。用 Python、浏览器端共享规则、GitHub Pages 做了虚构简历评分、证据/风险展示、reviewer/action/reason 必填、审计与重置。最难的是让 Python 与浏览器评分规则一致，避免前后端给出不同结论。目前证据是13 项单元测试、5 项合成夹具与 36 项 Python/浏览器对照。但候选人均为合成资料；关键词证据不代表真实胜任力；没有真实模型；如果真实落地，下一步是隐私/偏见评估、人工审核、真实身份与权限、可申诉流程和留存治理。
+
+## 3 分钟
+
+先演示核心路径：虚构简历评分、证据/风险展示、reviewer/action/reason 必填、审计与重置。再打开仓库中的测试与案例页，解释为什么把状态/证据留在可检查的位置。重点讲一个取舍：让 Python 与浏览器评分规则一致，避免前后端给出不同结论。最后明确验证范围：13 项单元测试、5 项合成夹具与 36 项 Python/浏览器对照；当前仅有合成规则回归；真实招聘效度未经验证。不把演示、合成样本和生产效果混为一谈。
+
+## 10 分钟技术深挖
+
+1. 展示 README 的 Quick Start 与架构图/目录。
+2. 从一个输入走到状态变化或输出，指出 虚构简历评分、证据/风险展示、reviewer/action/reason 必填、审计与重置 对应的源代码。
+3. 现场说明最难问题：让 Python 与浏览器评分规则一致，避免前后端给出不同结论；对照测试或复现步骤。
+4. 解释失败路径及限制：候选人均为合成资料；关键词证据不代表真实胜任力；没有真实模型。
+5. 用 隐私/偏见评估、人工审核、真实身份与权限、可申诉流程和留存治理 说明真正上线的优先级和验收证据。
+
+## 九个常见追问
+
+1. **为什么这样设计架构？** 为了把 虚构简历评分、证据/风险展示、reviewer/action/reason 必填、审计与重置 的核心规则与展示/外部依赖分开，便于检查失败边界。
+2. **最难的 bug/取舍？** 让 Python 与浏览器评分规则一致，避免前后端给出不同结论；请指向对应测试或演示复现，避免编造线上事故。
+3. **用了什么框架？** Python、浏览器端共享规则、GitHub Pages。选型服务于静态或离线演示，不等同生产选型结论。
+4. **上线还差什么？** 隐私/偏见评估、人工审核、真实身份与权限、可申诉流程和留存治理。
+5. **如何防止误用？** 候选人均为合成资料；关键词证据不代表真实胜任力；没有真实模型；任何不可逆外部动作需人工确认。
+6. **怎么测试？** 13 项单元测试、5 项合成夹具与 36 项 Python/浏览器对照。先跑 README 命令，再看具体断言，不把 200 或编译当成产品验收。
+7. **AI 在哪里？** 当前仅有合成规则回归；真实招聘效度未经验证。不要把确定性规则、提示词或可选模型接口说成已验证的 AI 效果。
+8. **哪些是 Mock？** 候选人均为合成资料；关键词证据不代表真实胜任力；没有真实模型。
+9. **模型怎么评测？个人贡献是什么？** 当前仅有合成规则回归；真实招聘效度未经验证。我负责公开仓库里可见的实现、测试和说明；未核验的业务结果与第三方工作不纳入我的贡献。
