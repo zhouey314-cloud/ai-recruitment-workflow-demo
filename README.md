@@ -6,6 +6,8 @@ Synthetic decision support: 12 fictional resumes, 3 fictional jobs, evidence ext
 
 ## Demo / quick start
 
+Live illustrative review screen: <https://zhouey314-cloud.github.io/ai-recruitment-workflow-demo/>. This static page is not connected to the Python scoring workflow or an HR system.
+
 Python 3.10+: `python3 recruitment.py`; `python3 evals/run.py`; `python3 -m unittest discover -s tests`. Open `web/index.html` for an illustrative human review screen. Output is `output/report.json` with 36 comparisons.
 
 ## Problem and architecture
@@ -18,4 +20,4 @@ Nine unit tests and five synthetic fixture checks cover evidence trace, unsuppor
 
 ## Status / limitations / privacy
 
-`IMPLEMENTED_AND_TESTED`: parser contract, evidence rubric, trace, gate and audit. `MOCK`: fictional records and static review screen. `NOT_IMPLEMENTED`: real parsing, model, fairness assessment, authenticated reviewer, HR integration and deployment. Never use the score to automatically hire or reject a real person. MIT.
+`IMPLEMENTED_AND_TESTED`: parser contract, evidence rubric, trace, gate and audit. `MOCK`: fictional records and static review screen. `DEPLOYED_STATIC_PREVIEW`: GitHub Pages screen only. `NOT_IMPLEMENTED`: real parsing, model, fairness assessment, authenticated reviewer and HR integration. Never use the score to automatically hire or reject a real person. MIT.
