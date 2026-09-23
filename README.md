@@ -1,5 +1,7 @@
 # AI Recruitment Workflow Demo
 
+**LIVE_DEMO / SYNTHETIC CANDIDATES** · [Try the workbench](https://zhouey314-cloud.github.io/ai-recruitment-workflow-demo/) · [Case study](docs/case-study.md) · [Resume bullets](docs/resume-bullets.md) · [Interview notes](docs/interview-notes.md)
+
 Synthetic decision support: 12 fictional resumes, 3 fictional jobs, evidence extraction, rubric scoring and a mandatory human decision gate.
 
 ![Architecture](docs/images/architecture.svg)
