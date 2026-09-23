@@ -1,0 +1,2 @@
+{"case":"unsupported self-reported skill","resume":{"id":"x","name":"Fake","skills":["Python"],"years":1,"evidence":[]},"job":{"id":"j","skills":["Python"]},"expected_score":0,"provenance":"synthetic_unverified"}
+{"case":"missing evidence text","resume":{"id":"x2","name":"Fake","skills":[],"years":0,"evidence":[]},"job":{"id":"j","skills":["QA"]},"expected_score":0,"provenance":"synthetic_unverified"}

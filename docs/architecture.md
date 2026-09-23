@@ -1,0 +1,3 @@
+# Rubric and failure analysis
+
+Each job skill has equal weight. A point requires a supporting phrase in the resume evidence field. This intentionally simple baseline avoids treating a free-text skill list as proof. Example failure: a candidate may demonstrate a skill using different words and receive zero; human review must correct it. Another failure: a misleading phrase could contain a keyword without proving ability. No ranking or automated rejection is performed. A production system would require consent, fairness review, verified evidence, privacy retention, reviewer identity and a provider-backed eval set from domain experts.
