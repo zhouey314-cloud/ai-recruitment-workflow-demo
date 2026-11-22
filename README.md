@@ -1,6 +1,6 @@
 # AI Recruitment Workflow Demo
 
-A synthetic recruitment-review workbench that traces rule scores to evidence and requires a human decision for every candidate.
+**An inspectable review workflow, not a hiring engine.** This demo ties each rule score to resume evidence and leaves every decision to a human reviewer. All roles and candidates are fictional.
 
 **LIVE_DEMO / SYNTHETIC CANDIDATES** · [Try the workbench](https://zhouey314-cloud.github.io/ai-recruitment-workflow-demo/) · [Case study](docs/case-study.md) · [Resume bullets](docs/resume-bullets.md) · [Interview notes](docs/interview-notes.md)
 
@@ -13,6 +13,14 @@ The screenshot shows the deployed workbench's initial state, using fictional dat
 ## Demo / quick start
 
 Live interactive fictional workbench: <https://zhouey314-cloud.github.io/ai-recruitment-workflow-demo/>. [Browser eval replay](https://zhouey314-cloud.github.io/ai-recruitment-workflow-demo/eval/) shows the synthetic fixture results. The browser reads the same fixture data and rule configuration as Python; CI checks parity across all 36 combinations. There is no HR integration or real candidate data.
+
+### A two-minute review
+
+1. Open the [workbench](https://zhouey314-cloud.github.io/ai-recruitment-workflow-demo/) and select **AI application engineer** with **Sample Candidate 01**. **Record human decision** starts disabled.
+2. Click **Analyze evidence**. Inspect the quoted Python and API evidence and the missing evaluation skill. Switch to **Sample Candidate 04** and analyze again: an empty evidence list should produce missing skills and a flag, not an automatic decision.
+3. Use a fictional reviewer name, choose **Hold for clarification**, and add a fictional reason. Click **Record human decision**, check the local audit, then use **Reset local audit**. No applicant or reviewer data needs to leave this browser; do not enter real names or resumes.
+
+[Fixed CI snapshot (`18827a9`)](https://github.com/zhouey314-cloud/ai-recruitment-workflow-demo/actions/runs/36246053618) · [What the fixtures prove and what they do not](evals/PROJECT_EVAL_SPEC.md)
 
 Python 3.10+: `python3 recruitment.py`; `python3 evals/run.py`; `python3 -m unittest discover -s tests`; `node tests/parity.mjs` after generating the Python report. Serve the repository root with `python3 -m http.server 8000` and open `http://localhost:8000/` for the browser demo. Output is `output/report.json` with 36 comparisons. The interactive audit is only in browser localStorage and can be reset; it is not secure persistence.
 
